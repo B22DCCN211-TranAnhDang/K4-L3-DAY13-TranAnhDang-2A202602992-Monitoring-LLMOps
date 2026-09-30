@@ -29,6 +29,9 @@
 | Prompt versions | `evidence/09-prompt-versions.png` |
 | Prompt rollback | `evidence/10-prompt-rollback.png` |
 | Dashboard runtime | `evidence/11-dashboard-overview.png` |
+| Incident metric | `evidence/12-incident-metric.png` |
+| Incident log | `evidence/13-incident-log.png` |
+| Incident trace | `evidence/14-incident-trace.png` |
 
 ## 3. Kết quả kỹ thuật
 
@@ -74,9 +77,9 @@
 
 - **Challenge ID:** `day13-k4-l3b-monitoring-llmops-v1`
 - **Khoảng thời gian điều tra:** 2026-09-30 04:06:00Z - 04:07:00Z
-- **Triệu chứng từ metrics:** Latency P95 phía Server vượt quá ngưỡng 2000ms (đạt ~2650ms) và Client Queue Latency vọt lên ~13.2s ở feature `monitoring` dưới tải `concurrency 5`.
-- **Log line và correlation ID liên quan:** Event `response_sent` với `correlation_id=req-ff995f29`, `feature=monitoring`, `latency_ms=2650`, `service=api`.
-- **Trace ID và span gây ảnh hưởng:** Trace có `correlation_id=req-ff995f29` trên Langfuse Cloud cho thấy span `retrieval` bị nghẽn tới 2500ms (vượt ngưỡng 2000ms), trong khi span `generation` của LLM chỉ mất 150ms.
+- **Triệu chứng từ metrics:** Latency P95 phía Server vượt quá ngưỡng 2000ms (đạt ~2650ms) và Client Queue Latency vọt lên ~13.2s ở feature `monitoring` dưới tải `concurrency 5` (xem `evidence/12-incident-metric.png`).
+- **Log line và correlation ID liên quan:** Event `response_sent` với `correlation_id=req-ff995f29`, `feature=monitoring`, `latency_ms=2650`, `service=api` (xem `evidence/13-incident-log.png`).
+- **Trace ID và span gây ảnh hưởng:** Trace có `correlation_id=req-ff995f29` trên Langfuse Cloud cho thấy span `retrieval` bị nghẽn tới 2500ms (vượt ngưỡng 2000ms), trong khi span `generation` của LLM chỉ mất 150ms (xem `evidence/14-incident-trace.png`).
 - **Root cause:** Đề bài `day13-k4-l3b-monitoring-llmops-v1` kích hoạt sự cố `rag_slow` (Seed: 1312) làm chậm 2.5 giây ở bước Tìm kiếm tài liệu RAG (`app/mock_rag.py`).
 - **Fix action:** Tắt sự cố bằng lệnh `python scripts/inject_incident.py --scenario rag_slow --disable` để khôi phục hiệu năng tìm kiếm RAG.
 - **Preventive measure:** Cấu hình Alert `HighLatencyP95` (khi P95 > 2000ms duy trì 5m) kết hợp cơ chế Timeout 1.5s cho RAG retrieval kèm Fallback answer.
