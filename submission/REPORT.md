@@ -8,7 +8,7 @@
 - **MSSV:** 2A202602992 / B22DCCN211
 - **Lớp:** K4-L3B
 - **Repository URL:** https://github.com/B22DCCN211-TranAnhDang/K4-L3-DAY13-TranAnhDang-2A202602992-Monitoring-LLMOps
-- **Commit SHA cuối:** `90118c6bb859b21e7bc7ffb42d285398248da7a0` (dạng ngắn: `90118c6`)
+- **Commit SHA cuối:** `8f3d466c3603907c622b73697e91c9543d20a428` (dạng ngắn: `8f3d466`)
 - **Challenge ID:** `day13-k4-l3b-monitoring-llmops-v1`
 - **Tên project Langfuse cá nhân:** `day13-k4-l3b-2A202602992`
 
